@@ -9,9 +9,9 @@ const {open} = require("sqlite")
 const sqlite3 = require("sqlite3")
 
 
-const server = express()
-server.use(cors())
-server.use(express.json())
+const app = express()
+app.use(cors())
+app.use(express.json())
 
 const dbPath = path.join(__dirname,"nxtTrenz.db")
 let db = null 
@@ -22,7 +22,7 @@ const initializeDBAndServer = async ()=>{
                   filename: dbPath,
                   driver: sqlite3.Database
             })
-           server.listen(6000,()=>{
+           app.listen(6000,()=>{
             console.log("Server Running At http://localhost:6000")
            }) 
       }catch(e){
@@ -35,7 +35,7 @@ const initializeDBAndServer = async ()=>{
 initializeDBAndServer();
 
 
-server.post("/register", async(request,response)=>{
+app.post("/register", async(request,response)=>{
       const {username,password,name,email} = request.body
 
       const hashedPassword = await bcrypt.hash(password,10)
@@ -64,7 +64,7 @@ server.post("/register", async(request,response)=>{
 })
 
 
-server.post("/login", async(request,response)=>{
+app.post("/login", async(request,response)=>{
       const {username,password} = request.body
 
       const isUserExists = `SELECT * FROM user WHERE username = "${username}";`

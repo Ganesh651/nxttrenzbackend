@@ -1,5 +1,5 @@
 ###
-POST http://localhost6000/register
+POST http://localhost:6000/register
 Content-Type: application/json
 
 {

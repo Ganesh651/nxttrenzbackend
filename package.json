@@ -2,7 +2,7 @@
   "name": "nxttrenzbackend",
   "version": "1.0.0",
   "description": "e-commerce application server side logic",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
