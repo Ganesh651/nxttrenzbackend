@@ -1,0 +1,10 @@
+{
+      "sqltools.connections": [
+            {
+                  "previewLimit": 50,
+                  "driver": "SQLite",
+                  "name": "nxtTrenz",
+                  "database": "${workspaceFolder:nxttrenzbackend}/nxtTrenz.db"
+            }
+      ]
+}

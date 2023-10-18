@@ -1,0 +1,21 @@
+###
+POST http://localhost:4000/register
+Content-Type: application/json
+
+{
+      "username": "rahul",
+      "password":"rahul@2021",
+      "name": "Ganesh",
+      "email": "ganireddy651@gmail.com"
+}
+###
+
+
+POST http://localhost:4000/login
+Content-Type: application/json
+
+
+{
+      "username": "ganesh",
+      "password":"ganesh@1995"
+}
