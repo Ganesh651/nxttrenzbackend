@@ -7,7 +7,6 @@ const jwt = require("jsonwebtoken")
 
 const {open} = require("sqlite")
 const sqlite3 = require("sqlite3")
-const { error } = require("console")
 
 
 const server = express()
@@ -23,8 +22,8 @@ const initializeDBAndServer = async ()=>{
                   filename: dbPath,
                   driver: sqlite3.Database
             })
-           server.listen(4000,()=>{
-            console.log("Server Running At http://localhost:4000")
+           server.listen(6000,()=>{
+            console.log("Server Running At http://localhost:6000")
            }) 
       }catch(e){
             console.log(`DB Error ${e.message}`)
