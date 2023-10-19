@@ -1,5 +1,5 @@
 ###
-POST http://localhost:6000/register
+POST http://localhost:7000/register
 Content-Type: application/json
 
 {
@@ -11,11 +11,19 @@ Content-Type: application/json
 ###
 
 
-POST http://localhost:6000/login
+POST http://localhost:7000/login
 Content-Type: application/json
 
 
 {
-      "username": "ganesh",
-      "password":"ganesh@1995"
+      "username": "swetha",
+      "password":"swetha@2000"
 }
+###
+GET http://localhost:7000/users
+###
+
+
+GET http://localhost:7000/products
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN3ZXRoYSIsImlhdCI6MTY5NzcxMTkzN30.rWG-ndx1108p90wpdeXMBV7HSIWmwWMvKWRPQ6qmuPY
+# ?sort_by="price"&category=""&title_search=""&rating=""

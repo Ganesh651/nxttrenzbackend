@@ -22,8 +22,8 @@ const initializeDBAndServer = async ()=>{
                   filename: dbPath,
                   driver: sqlite3.Database
             })
-           app.listen(6000,()=>{
-            console.log("Server Running At http://localhost:6000")
+           app.listen(7000,()=>{
+            console.log("Server Running At http://localhost:7000")
            }) 
       }catch(e){
             console.log(`DB Error ${e.message}`)
@@ -38,11 +38,8 @@ initializeDBAndServer();
 app.post("/register", async(request,response)=>{
       const {username,password,name,email} = request.body
 
-      const hashedPassword = await bcrypt.hash(password,10)
-
       const isUserExists = `SELECT * FROM user WHERE username="${username}"`
       const dbResponse = await db.get(isUserExists)
-
 
       if (dbResponse !== undefined){
             response.status(400)
@@ -52,6 +49,7 @@ app.post("/register", async(request,response)=>{
                    response.status(400)
                    response.send("Password is too short")
             }else{
+                  const hashedPassword = await bcrypt.hash(password,12)
                   const createNewUser = `INSERT INTO 
                   user (username,password,name,email) 
                   VALUES("${username}","${hashedPassword}","${name}","${email}");`
@@ -69,16 +67,17 @@ app.post("/login", async(request,response)=>{
 
       const isUserExists = `SELECT * FROM user WHERE username = "${username}";`
       const dbResponse = await db.get(isUserExists)
+     
 
       if (dbResponse === undefined){
             response.status(400)
-            response.send("Username or Password didn't match")
+            response.send("Username didn't match")
       }else{
             const isPasswordSame = await bcrypt.compare(password,dbResponse.password)
 
             if (isPasswordSame === false){
                   response.status(400)
-                  response.send("Username or Password didn't match")
+                  response.send("Password didn't match")
             }else{
                   const payload = {username: username}
                   const jwtToken = jwt.sign(payload,"gajarla")
@@ -104,9 +103,28 @@ const authenticateToken = (request,response,next)=>{
                         response.status(401)
                         response.send({message:"Missing Authentication Token"})
                   }else{
-                        naxt()
+                        next()
                   }
             })
       }
       
 }
+
+app.get("/users", async (req,res)=>{
+      const getUsers = `select * from user`
+      const dbResponse = await db.all(getUsers)
+      res.send(dbResponse)
+})
+
+app.get("/products", authenticateToken, async(request,response)=>{
+      // const {queries} = request.query
+      // console.log(queries)
+      const sortBy = request.query.sort_by;
+  const category = request.query.category;
+  const titleSearch = request.query.title_search;
+  const rating = request.query.rating;
+      const getProducts =   
+       `SELECT * FROM products ORDER BY price ASC;`
+const dbResponse = await db.all(getProducts)
+response.send(dbResponse)
+})
