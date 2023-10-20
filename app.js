@@ -128,3 +128,11 @@ app.get("/products", authenticateToken, async(request,response)=>{
 const dbResponse = await db.all(getProducts)
 response.send(dbResponse)
 })
+
+
+app.get("/prime_deals", authenticateToken, async(requset,response)=>{
+      const getPrimeDeals = `select * from prime_deals;`
+
+      const dbResponse = await db.all(getPrimeDeals)
+      response.send(dbResponse)
+})

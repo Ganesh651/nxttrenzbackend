@@ -4,9 +4,9 @@
   "description": "e-commerce application server side logic",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Ganesh",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
